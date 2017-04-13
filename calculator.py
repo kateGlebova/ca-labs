@@ -28,9 +28,9 @@ def calories_calculator(sex, weight, height, age, exercise_level):
         return -1
 
     if sex == 'male':
-        bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+        bmr = 66 + (13.7 * weight) + (5 * height) - (6.8 * age)
     else:
-        bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+        bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)
 
     return EXERCISE_LEVELS[exercise_level] * bmr
 

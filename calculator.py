@@ -60,6 +60,20 @@ def calories_calculator(sex, weight, height, age, exercise_level):
     :return: float or int | person's daily calories or -1 if parameters are not valid
     """
     bmr = bmr_calculator(sex, weight, height, age)
-    if bmr == -1:
+    if bmr == -1 or exercise_level not in EXERCISE_LEVELS:
         return -1
     return EXERCISE_LEVELS[exercise_level] * bmr
+
+
+def bmi_calculator(weight, height):
+    """
+    Calculate a person's body mass index.
+    :param weight: float | weight in kilograms
+    :param height: height in centimeters
+    :return: float or int | person's body mass index or -1 if parameters are not valid
+    """
+    if weight <= 0 or height <= 0:
+        return -1
+    height_meters = height / 100
+    bmi = weight / height_meters ** 2
+    return bmi

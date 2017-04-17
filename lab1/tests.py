@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest import main
 
-from calculator import calories_calculator, bmr_calculator, bmi_calculator
+from lab1.calculator import calories_calculator, bmr_calculator, bmi_calculator
 
 
 class TestCaloriesCalculator(TestCase):

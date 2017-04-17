@@ -1,6 +1,8 @@
-import view as v
+import lab1.view as v
 import sys
-import calculator as c
+import lab1.calculator as c
+
+from lab1.calculator import EXERCISE_LEVELS
 
 
 def get_sex():
@@ -37,9 +39,10 @@ def bmr_control(sex, weight, height, age):
 
 
 def daily_control(sex, weight, height, age):
-    exercise_level = v.exercise_level_input()
+    choices = list(EXERCISE_LEVELS.keys())
+    exercise_level = v.exercise_level_input(choices)
     while exercise_level is None:
-        exercise_level = v.exercise_level_input()
+        exercise_level = v.exercise_level_input(choices)
     daily_rate = c.calories_calculator(sex, weight, height, age, exercise_level)
     v.daily_data_output(sex, weight, height, age, exercise_level, daily_rate)
 
@@ -50,9 +53,10 @@ def bmi_control(weight, height):
 
 
 def full_control(sex, weight, height, age):
-    exercise_level = v.exercise_level_input()
+    choices = list(EXERCISE_LEVELS.keys())
+    exercise_level = v.exercise_level_input(choices)
     while exercise_level is None:
-        exercise_level = v.exercise_level_input()
+        exercise_level = v.exercise_level_input(choices)
     daily_rate = c.calories_calculator(sex, weight, height, age, exercise_level)
     bmi = c.bmi_calculator(weight, height)
     bmr = c.bmr_calculator(sex, weight, height, age)
@@ -72,9 +76,11 @@ def choice_analysis(choice, sex, weight, height, age):
 
 def main():
     choice = v.menu()
+
+    while choice is None:
+        choice = v.menu()
+
     while choice != 5:
-        while choice is None:
-            choice = v.menu()
 
         sex = get_sex()
         age = get_age()

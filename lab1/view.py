@@ -1,7 +1,9 @@
 from terminaltables import AsciiTable
 
 
-def error(error_message):
+def validation(is_valid, inp, error_message='Invalid input.'):
+    if is_valid:
+        return inp
     print(error_message, '\n')
 
 
@@ -13,107 +15,77 @@ def menu():
     print('[5] Quit')
     try:
         choice = int(input('Your choice: '))
-        if not 1 <= choice <= 6:
-            raise ValueError
-        return choice
     except ValueError:
-        error('Invalid input')
-        return None
+        return validation(False, None)
+    return validation(1 <= choice <= 6, choice)
 
 
 def sex_input():
-    try:
-        sex = input('Enter your sex ("male" / "female"): ')
-        if not sex in ('male', 'female'):
-            raise ValueError
-        return sex
-    except ValueError:
-        error('Invalid input')
-        return None
+    sex = input('Enter your sex ("male" / "female"): ')
+    return validation(sex in ('male', 'female'), sex)
 
 
 def age_input():
     try:
         age = int(input('Enter your age (in years): '))
-        if age <= 0:
-            raise ValueError
-        return age
     except ValueError:
-        error('Invalid input')
-        return None
+        return validation(False, None)
+    return validation(age > 0, age)
 
 
 def weight_input():
     try:
         weight = float(input('Enter your weight(in kilograms): '))
-        if weight <= 0:
-            raise ValueError
-        return weight
     except ValueError:
-        error('Invalid input')
-        return None
+        return validation(False, None)
+    return validation(weight > 0, weight)
 
 
 def height_input():
     try:
         height = float(input('Enter your height(in centimeters): '))
-        if height <= 0:
-            raise ValueError
-        return height
     except ValueError:
-        error('Invalid input')
-        return None
+        return validation(False, None)
+    return validation(height > 0, height)
 
 
-def exercise_level_input():
-    try:
-        exercise_level = input('Enter exercise level ("None"/"Sedentary"/"Light"/"Moderate"/"Hard"/"Non-Stop"): ')
-    except ValueError:
-        error('Invalid input')
-        return None
-    return exercise_level
+def exercise_level_input(choices):
+    exercise_level = input('Enter exercise level (%s): ' % '/'.join(choices))
+    return validation(exercise_level in choices, exercise_level)
 
 
-def data_output(sex, age, weight, height):
-    table_data = [
-        ['SEX', 'AGE', 'WEIGHT', 'HEIGHT'],
-        [sex, age, weight, height]
-    ]
-    table = AsciiTable(table_data, 'PHYSIQUE')
-    print('\n', table.table)
+def data_output(header, row, caption):
+    row = [isinstance(element, float) and "%.2f" % element or element for element in row]
+    print('\n', AsciiTable([header, row], caption).table)
+
+
+def physique_data_output(sex, age, weight, height):
+    data_output(['SEX', 'AGE', 'WEIGHT', 'HEIGHT'], [sex, age, weight, height], 'PHYSIQUE')
 
 
 def bmi_data_output(weight, height, bmi):
-    table_data = [
-        ['WEIGHT', 'HEIGHT', 'BMI'],
-        [weight, height, bmi]
-    ]
-    table = AsciiTable(table_data, 'Body Mass Index Calculator')
-    print('\n', table.table)
+    data_output(['WEIGHT', 'HEIGHT', 'BMI'], [weight, height, bmi], 'Body Mass Index Calculator')
 
 
 def daily_data_output(sex, age, weight, height, exercise_level, daily_rate):
-    table_data = [
+    data_output(
         ['SEX', 'AGE', 'WEIGHT', 'HEIGHT', 'EXERCISE LEVEL', 'DAILY RATE'],
-        [sex, age, weight, height, exercise_level, daily_rate]
-    ]
-    table = AsciiTable(table_data, 'Daily Calorie Calculator')
-    print('\n', table.table)
+        [sex, age, weight, height, exercise_level, daily_rate],
+        'Daily Calorie Calculator'
+    )
 
 
 def bmr_data_output(sex, weight, height, age, bmr):
-    table_data = [
+    data_output(
         ['SEX', 'AGE', 'WEIGHT', 'HEIGHT', 'BMR'],
-        [sex, age, weight, height, bmr]
-    ]
-    table = AsciiTable(table_data, 'Basal Metabolic Rate Calculator')
-    print('\n', table.table)
+        [sex, age, weight, height, bmr],
+        'Basal Metabolic Rate Calculator'
+    )
 
 
-def full_output(sex, age, weight, height, exercise_level, daily_rate, bmr, bmi):
-    table_data = [
+def full_output(sex, weight, height, age, exercise_level, daily_rate, bmr, bmi):
+    data_output(
         ['SEX', 'AGE', 'WEIGHT', 'HEIGHT', 'EXERCISE LEVEL', 'DAILY RATE', 'BMR', 'BMI'],
-        [sex, age, weight, height, exercise_level, daily_rate, bmr, bmi]
-    ]
-    table = AsciiTable(table_data, 'Full Calculations')
-    print('\n', table.table)
+        [sex, age, weight, height, exercise_level, daily_rate, bmr, bmi],
+        'Full Calculations'
+    )

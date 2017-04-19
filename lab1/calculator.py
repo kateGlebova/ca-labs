@@ -1,3 +1,7 @@
+"""
+Calories calculator module.
+"""
+
 EXERCISE_LEVELS = {
     'None': 1,
     'Sedentary': 1.2,
@@ -51,7 +55,7 @@ def bmr_calculator(sex, weight, height, age):
 
 def calories_calculator(sex, weight, height, age, exercise_level):
     """
-    Calculate daily calorie needs for person with specified parameters.
+        Calculate daily calorie needs for person with specified parameters.
     :param sex: string | 'male' or 'female'
     :param weight: float | weight in kilograms
     :param height: float | height in centimeters

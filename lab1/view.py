@@ -1,3 +1,6 @@
+"""
+Views module.
+"""
 from terminaltables import AsciiTable
 
 

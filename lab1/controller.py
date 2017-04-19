@@ -1,3 +1,7 @@
+"""
+Controller module.
+"""
+
 import lab1.view as v
 import sys
 import lab1.calculator as c

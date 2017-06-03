@@ -4,41 +4,41 @@ from abc import ABCMeta
 class Serializer:
     __metaclass__ = ABCMeta
 
-    def __init__(self, path):
+    def __init__(self, path, mode='r'):
         self._path = path
-        self.obj = self.load()
+        self._obj = self.load(mode)
 
-    def load(self):
+    def load(self, mode):
         """
         Deserialize object from the file.
         :return: object
         """
         try:
-            with open(self._path) as f:
+            with open(self._path, mode) as f:
                 return self.s_load(f)
         except FileNotFoundError:
             return {}
 
     def add_bmr(self, sex, age, weight, height, bmr):
-        if 'bmr' not in self.obj:
-            self.obj['bmr'] = {}
+        if 'bmr' not in self._obj:
+            self._obj['bmr'] = {}
 
-        if bmr not in self.obj['bmr']:
-            self.obj['bmr'][bmr] = {'sex': sex, 'age': age, 'weight': weight, 'height': height}
+        if bmr not in self._obj['bmr']:
+            self._obj['bmr'][bmr] = {'sex': sex, 'age': age, 'weight': weight, 'height': height}
 
     def add_bmi(self, weight, height, bmi):
-        if 'bmi' not in self.obj:
-            self.obj['bmi'] = {}
+        if 'bmi' not in self._obj:
+            self._obj['bmi'] = {}
 
-        if bmi not in self.obj['bmi']:
-            self.obj['bmi'][bmi] = {'weight': weight, 'height': height}
+        if bmi not in self._obj['bmi']:
+            self._obj['bmi'][bmi] = {'weight': weight, 'height': height}
 
     def add_calories(self, sex, age, weight, height, exercise_level, calories):
-        if 'calories' not in self.obj:
-            self.obj['calories'] = {}
+        if 'calories' not in self._obj:
+            self._obj['calories'] = {}
 
-        if calories not in self.obj['calories']:
-            self.obj['calories'][calories] = {
+        if calories not in self._obj['calories']:
+            self._obj['calories'][calories] = {
                 'sex': sex,
                 'age': age,
                 'weight': weight,

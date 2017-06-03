@@ -15,4 +15,4 @@ class JSONSerializer(Serializer):
         return json.load(f)
 
     def s_dump(self, f):
-        json.dump(self.obj, f)
+        json.dump(self._obj, f)

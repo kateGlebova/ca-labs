@@ -15,4 +15,4 @@ class YAMLSerializer(Serializer):
         return yaml.load(f)
 
     def s_dump(self, f):
-        yaml.dump(self.obj, f)
+        yaml.dump(self._obj, f)

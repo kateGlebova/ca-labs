@@ -12,6 +12,7 @@ from calculator import EXERCISE_LEVELS
 
 import view as v
 from serialization.json_serialization import JSONSerializer
+from serialization.pickle_serialization import PICKLESerializer
 from serialization.yaml_serialization import YAMLSerializer
 
 
@@ -22,7 +23,7 @@ def get_format():
 
 
 def load_serializer():
-    formats = {'json': JSONSerializer, 'yaml': YAMLSerializer}
+    formats = {'json': JSONSerializer, 'yaml': YAMLSerializer, 'pickle': PICKLESerializer}
     format = get_format()
     try:
         return formats[format]()

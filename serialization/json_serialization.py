@@ -6,7 +6,6 @@ from serialization.serialization import Serializer
 
 
 class JSONSerializer(Serializer):
-
     _filename = 'data.json'
 
     def __init__(self, path=join(dirname(__file__), _filename)):

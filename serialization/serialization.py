@@ -1,5 +1,4 @@
-from abc import ABCMeta, abstractmethod
-from os.path import join, dirname
+from abc import ABCMeta
 
 
 class Serializer:

@@ -6,7 +6,6 @@ from serialization.serialization import Serializer
 
 
 class YAMLSerializer(Serializer):
-
     _filename = 'data.yaml'
 
     def __init__(self, path=join(dirname(__file__), _filename)):

@@ -20,6 +20,14 @@ class Serializer:
             return {}
 
     def add_bmr(self, sex, age, weight, height, bmr):
+        """
+        Add BMR entry to the object.
+        :param sex: string | 'male' or 'female'
+        :param weight: float | weight in kilograms
+        :param height: float | height in centimeters
+        :param age: int | age in years
+        :param bmr: float | basal metabolic rate
+        """
         if 'bmr' not in self._obj:
             self._obj['bmr'] = {}
 
@@ -27,6 +35,12 @@ class Serializer:
             self._obj['bmr'][bmr] = {'sex': sex, 'age': age, 'weight': weight, 'height': height}
 
     def add_bmi(self, weight, height, bmi):
+        """
+        Add BMR entry to the object.
+        :param weight: float | weight in kilograms
+        :param height: float | height in centimeters
+        :param bmi: float | body mass index
+        """
         if 'bmi' not in self._obj:
             self._obj['bmi'] = {}
 
@@ -34,6 +48,15 @@ class Serializer:
             self._obj['bmi'][bmi] = {'weight': weight, 'height': height}
 
     def add_calories(self, sex, age, weight, height, exercise_level, calories):
+        """
+        Add daily rate entry to the object.
+        :param sex: string | 'male' or 'female'
+        :param weight: float | weight in kilograms
+        :param height: float | height in centimeters
+        :param age: int | age in years
+        :param exercise_level: string | name of the exercise level
+        :param calories: float | daily rate
+        """
         if 'calories' not in self._obj:
             self._obj['calories'] = {}
 
@@ -47,6 +70,9 @@ class Serializer:
             }
 
     def dump(self):
+        """
+        Serialize object to the file.
+        """
         with open(self._path, 'w') as f:
             self.s_dump(f)
 

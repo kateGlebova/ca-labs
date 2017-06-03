@@ -17,12 +17,18 @@ from serialization.yaml_serialization import YAMLSerializer
 
 
 def get_format():
+    """
+    Get the serialization format from the config file.
+    """
     config = ConfigParser()
     config.read(join(dirname(__file__), 'conf.ini'))
     return config['serialization']['serialization_format']
 
 
 def load_serializer():
+    """
+    Load the serializer according to the format specified in the config file.
+    """
     formats = {'json': JSONSerializer, 'yaml': YAMLSerializer, 'pickle': PICKLESerializer}
     format = get_format()
     try:

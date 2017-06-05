@@ -14,24 +14,29 @@ class Serializer:
 
     Methods s_load, s_dump must be implemented in the derived classes.
     """
-    __metaclass__ = ABCMeta
 
-    def __init__(self, path, mode='r'):
+    def __init__(self, path):
         """
         Initialise _path attribute and load object (_obj) from the file specified in _path.
         :param path: string | path to the file with the object
-        :param mode: string ('r', 'rb') | reading mode
         """
         self._path = path
-        self._obj = self._load(mode)
+        self._obj = self._load()
 
-    def _load(self, mode):
+    @property
+    def _mode(self):
+        """
+        Reading/writing mode attribute ('b' or '').
+        """
+        raise NotImplementedError()
+
+    def _load(self):
         """
         Deserialize object from the file.
         :return: object
         """
         try:
-            with open(self._path, mode) as f:
+            with open(self._path, 'r' + self._mode) as f:
                 return self.s_load(f)
         except (FileNotFoundError, ValueError):
             return {}
@@ -90,7 +95,7 @@ class Serializer:
         """
         Serialize object to the file.
         """
-        with open(self._path, 'w') as f:
+        with open(self._path, 'w' + self._mode) as f:
             self.s_dump(self._obj, f)
 
     @staticmethod

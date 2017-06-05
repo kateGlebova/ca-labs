@@ -1,10 +1,10 @@
 import pickle
 from os.path import dirname, join
 
-from serialization.serialization import Serializer
+from serialization.serializer_types import BinarySerializer
 
 
-class PICKLESerializer(Serializer):
+class PICKLESerializer(BinarySerializer):
     """
         A pickle calculator serializer.
 
@@ -20,7 +20,7 @@ class PICKLESerializer(Serializer):
     _filename = 'data.p'
 
     def __init__(self, path=join(dirname(__file__), _filename)):
-        super().__init__(path, 'rb')
+        super().__init__(path)
 
     @staticmethod
     def s_load(f):
@@ -37,10 +37,3 @@ class PICKLESerializer(Serializer):
         :return: None
         """
         pickle.dump(obj, f)
-
-    def dump(self):
-        """
-        Serialize object to the binary file.
-        """
-        with open(self._path, 'wb') as f:
-            self.s_dump(self._obj, f)

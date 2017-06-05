@@ -3,3 +3,6 @@ env/
 __pycache__/
 *.pyc
 *.pdf
+serialization/*.json
+serialization/*.yaml
+serialization/*.p

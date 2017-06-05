@@ -21,16 +21,18 @@ class JSONSerializer(Serializer):
     def __init__(self, path=join(dirname(__file__), _filename)):
         super().__init__(path)
 
-    def s_load(self, f):
+    @staticmethod
+    def s_load(f):
         """
          Wrap json loader function.
          :return: deserialized object
          """
         return json.load(f)
 
-    def s_dump(self, f):
+    @staticmethod
+    def s_dump(obj, f):
         """
         Wrap json dumper function.
         :return: None
         """
-        json.dump(self._obj, f)
+        json.dump(obj, f)

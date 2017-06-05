@@ -21,16 +21,18 @@ class YAMLSerializer(Serializer):
     def __init__(self, path=join(dirname(__file__), _filename)):
         super().__init__(path)
 
-    def s_load(self, f):
+    @staticmethod
+    def s_load(f):
         """
         Wrap yaml loader function.
         :return: deserialized object
         """
         return yaml.load(f)
 
-    def s_dump(self, f):
+    @staticmethod
+    def s_dump(obj, f):
         """
         Wrap yaml dumper function.
         :return: None
         """
-        yaml.dump(self._obj, f)
+        yaml.dump(obj, f)

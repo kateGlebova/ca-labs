@@ -22,23 +22,25 @@ class PICKLESerializer(Serializer):
     def __init__(self, path=join(dirname(__file__), _filename)):
         super().__init__(path, 'rb')
 
-    def s_load(self, f):
+    @staticmethod
+    def s_load(f):
         """
         Wrap pickle loader function.
         :return: deserialized object
         """
         return pickle.load(f)
 
-    def s_dump(self, f):
+    @staticmethod
+    def s_dump(obj, f):
         """
         Wrap pickle dumper function.
         :return: None
         """
-        pickle.dump(self._obj, f)
+        pickle.dump(obj, f)
 
     def dump(self):
         """
         Serialize object to the binary file.
         """
         with open(self._path, 'wb') as f:
-            self.s_dump(f)
+            self.s_dump(self._obj, f)

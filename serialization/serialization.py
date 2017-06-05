@@ -3,16 +3,16 @@ from abc import ABCMeta
 
 class Serializer:
     """
-        An abstract calculator serializer.
+    An abstract calculator serializer.
 
-        Methods:
+    Methods:
 
-            add_bmr -- add BMR entry to the object.
-            add_bmi -- add BMI entry to the object.
-            add_calories -- add daily rate entry to the object.
-            _dump -- _dump the object to the file.
+        add_bmr -- add BMR entry to the object.
+        add_bmi -- add BMI entry to the object.
+        add_calories -- add daily rate entry to the object.
+        dump -- dump the object to the file.
 
-        Methods _s_load, _s_dump must be implemented in the derived classes.
+    Methods s_load, s_dump must be implemented in the derived classes.
     """
     __metaclass__ = ABCMeta
 
@@ -23,9 +23,9 @@ class Serializer:
         :param mode: string ('r', 'rb') | reading mode
         """
         self._path = path
-        self._obj = self.load(mode)
+        self._obj = self._load(mode)
 
-    def load(self, mode):
+    def _load(self, mode):
         """
         Deserialize object from the file.
         :return: object
@@ -33,7 +33,7 @@ class Serializer:
         try:
             with open(self._path, mode) as f:
                 return self.s_load(f)
-        except FileNotFoundError:
+        except (FileNotFoundError, ValueError):
             return {}
 
     def add_bmr(self, sex, age, weight, height, bmr):
@@ -91,16 +91,18 @@ class Serializer:
         Serialize object to the file.
         """
         with open(self._path, 'w') as f:
-            self.s_dump(f)
+            self.s_dump(self._obj, f)
 
-    def s_load(self, f):
+    @staticmethod
+    def s_load(f):
         """
         Library loader function of the concrete format.
         :return: deserialized object
         """
         raise NotImplementedError()
 
-    def s_dump(self, f):
+    @staticmethod
+    def s_dump(obj, f):
         """
         Library dumper function of the concrete format.
         :return: None

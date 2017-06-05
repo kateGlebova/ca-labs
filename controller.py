@@ -94,7 +94,7 @@ def get_exercise_level():
     return exercise_level
 
 
-def bmr_control(srlzr, sex, weight, height, age):
+def bmr_control(srlzr, weight, height):
     """
     Call the BMR-calculator and output result.
     :param srlzr: Serializer subclass | serializer
@@ -104,12 +104,14 @@ def bmr_control(srlzr, sex, weight, height, age):
     :param height: float | height in centimeters
     :return: None
     """
+    sex = get_sex()
+    age = get_age()
     bmr = c.bmr_calculator(sex, weight, height, age)
     srlzr.add_bmr(sex, age, weight, height, bmr)
     v.bmr_data_output(sex, weight, height, age, bmr)
 
 
-def daily_control(srlzr, sex, weight, height, age):
+def daily_control(srlzr, weight, height):
     """
     Call daily calorie calculator and output result.
     :param srlzr: Serializer subclass | serializer
@@ -119,6 +121,8 @@ def daily_control(srlzr, sex, weight, height, age):
     :param height: float | height in centimeters
     :return: None
     """
+    sex = get_sex()
+    age = get_age()
     exercise_level = get_exercise_level()
     daily_rate = c.calories_calculator(sex, weight, height, age, exercise_level)
     srlzr.add_calories(sex, age, weight, height, exercise_level, daily_rate)
@@ -138,7 +142,7 @@ def bmi_control(srlzr, weight, height):
     v.bmi_data_output(weight, height, bmi)
 
 
-def full_control(srlzr, sex, weight, height, age):
+def full_control(srlzr, weight, height):
     """
     Call all of the calculators and output results.
     :param srlzr: Serializer subclass | serializer
@@ -148,6 +152,8 @@ def full_control(srlzr, sex, weight, height, age):
     :param height: float | height in centimeters
     :return: None
     """
+    sex = get_sex()
+    age = get_age()
     exercise_level = get_exercise_level()
     daily_rate = c.calories_calculator(sex, weight, height, age, exercise_level)
     bmi = c.bmi_calculator(weight, height)
@@ -160,7 +166,7 @@ def full_control(srlzr, sex, weight, height, age):
     v.full_output(sex, weight, height, age, exercise_level, daily_rate, bmr, bmi)
 
 
-def choice_analysis(srlzr, choice, sex, weight, height, age):
+def choice_analysis(srlzr, choice, weight, height):
     """
     Call a necessary calculators depending on a user's choice.
     :param srlzr: Serializer subclass | serializer
@@ -172,13 +178,13 @@ def choice_analysis(srlzr, choice, sex, weight, height, age):
     :return: None
     """
     if choice == 1:
-        bmr_control(srlzr, sex, weight, height, age)
+        bmr_control(srlzr, weight, height)
     elif choice == 2:
-        daily_control(srlzr, sex, weight, height, age)
+        daily_control(srlzr, weight, height)
     elif choice == 3:
         bmi_control(srlzr, weight, height)
     elif choice == 4:
-        full_control(srlzr, sex, weight, height, age)
+        full_control(srlzr, weight, height)
 
 
 def make_choice():
@@ -200,11 +206,9 @@ def main():
     srlzr = load_serializer()
     choice = make_choice()
     while choice != 5:
-        sex = get_sex()
-        age = get_age()
         weight = get_weight()
         height = get_height()
-        choice_analysis(srlzr, choice, sex, weight, height, age)
+        choice_analysis(srlzr, choice, weight, height)
         choice = make_choice()
 
     srlzr.dump()

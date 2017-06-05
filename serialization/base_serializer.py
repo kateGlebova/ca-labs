@@ -1,6 +1,3 @@
-from abc import ABCMeta
-
-
 class Serializer:
     """
     An abstract calculator serializer.

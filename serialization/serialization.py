@@ -2,9 +2,26 @@ from abc import ABCMeta
 
 
 class Serializer:
+    """
+        An abstract calculator serializer.
+
+        Methods:
+
+            add_bmr -- add BMR entry to the object.
+            add_bmi -- add BMI entry to the object.
+            add_calories -- add daily rate entry to the object.
+            _dump -- _dump the object to the file.
+
+        Methods _s_load, _s_dump must be implemented in the derived classes.
+    """
     __metaclass__ = ABCMeta
 
     def __init__(self, path, mode='r'):
+        """
+        Initialise _path attribute and load object (_obj) from the file specified in _path.
+        :param path: string | path to the file with the object
+        :param mode: string ('r', 'rb') | reading mode
+        """
         self._path = path
         self._obj = self.load(mode)
 

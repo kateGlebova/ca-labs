@@ -1,5 +1,5 @@
+from calculation.user import User
 from component_controllers.base_component_controller import BaseComponentController
-from user import User
 
 
 class BMIController(BaseComponentController):

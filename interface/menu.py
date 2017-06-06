@@ -4,7 +4,7 @@ from component_controllers.all_components_controller import AllComponentsControl
 from component_controllers.bmi_controller import BMIController
 from component_controllers.bmr_controller import BMRController
 from component_controllers.calories_controller import CaloriesController
-from interface import Interface
+from interface.interface import Interface
 
 
 class Menu(Interface):

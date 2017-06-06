@@ -1,8 +1,14 @@
+"""
+User class.
+
+Holds information about one user with weight and height as minimum data, calculates and serializes BMR,
+daily calories rate and BMI.
+"""
 from calculator import Calculator
 
 
 class User:
-    def __init__(self, height, weight, serializer, sex=None, age=None, exercise_level=None):
+    def __init__(self, serializer, height=None, weight=None, sex=None, age=None, exercise_level=None):
         self._sex = sex
         self._age = age
         self._height = height
@@ -40,7 +46,9 @@ class User:
 
     @height.setter
     def height(self, value):
-        if not value or value < 0:
+        if not value:
+            raise ValueError('Height is necessary for all computations.')
+        if value < 0:
             raise ValueError('Height cannot be negative.')
 
         self._height = value
@@ -51,7 +59,9 @@ class User:
 
     @weight.setter
     def weight(self, value):
-        if not value or value < 0:
+        if not value:
+            raise ValueError('Weight is necessary for all computations.')
+        if value < 0:
             raise ValueError('Weight cannot be negative.')
 
         self._weight = value

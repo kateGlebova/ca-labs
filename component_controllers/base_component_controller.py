@@ -1,4 +1,4 @@
-from calculator import Calculator
+from calculation.calculator import Calculator
 
 
 class BaseComponentController:

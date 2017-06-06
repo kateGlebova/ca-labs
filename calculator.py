@@ -64,8 +64,8 @@ class Calculator:
         :return: float or int | person's daily calories or -1 if parameters are not valid
         """
         bmr = self.bmr_calculator(sex, weight, height, age)
-        if bmr == -1 or exercise_level not in self.exercise_levels:
-            return -1
+        if exercise_level not in self.exercise_levels:
+            raise ValueError('Exercise level can only be %s.' % '/'.join(self.exercise_levels.keys()))
         return self.exercise_levels[exercise_level] * bmr
 
     @staticmethod

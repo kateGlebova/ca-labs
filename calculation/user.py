@@ -4,7 +4,7 @@ User class.
 Holds information about one user with weight and height as minimum data, calculates and serializes BMR,
 daily calories rate and BMI.
 """
-from calculator import Calculator
+from calculation.calculator import Calculator
 
 
 class User:

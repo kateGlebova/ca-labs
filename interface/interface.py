@@ -1,4 +1,4 @@
-from view import View
+from interface.view import View
 
 
 class Interface:

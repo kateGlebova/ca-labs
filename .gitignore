@@ -7,3 +7,6 @@ serialization/*.json
 serialization/*.yaml
 serialization/*.p
 *.mdj
+.DS_Store
+.coverage
+*.txt

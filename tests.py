@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest import main
 
-from calculator import Calculator
+from calculation.calculator import Calculator
 
 
 class TestCaloriesCalculator(TestCase):

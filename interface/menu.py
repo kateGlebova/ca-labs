@@ -9,15 +9,15 @@ from interface.interface import Interface
 
 class Menu(Interface):
     def launch(self):
-        choice = self.make_choice()
+        choice = self._make_choice()
         while choice != 5:
-            self.choice_analysis(choice)
-            choice = self.make_choice()
+            self._choice_analysis(choice)
+            choice = self._make_choice()
 
         self._serializer.dump()
         sys.exit(0)
 
-    def choice_analysis(self, choice):
+    def _choice_analysis(self, choice):
         """
         Instantiate necessary controller depending on a user's choice and call its control method.
         :param choice: int | choice code
@@ -32,7 +32,7 @@ class Menu(Interface):
         elif choice == 4:
             AllComponentsController(self._serializer, self._view).control()
 
-    def make_choice(self):
+    def _make_choice(self):
         """
         Ask user to choose an option while he/she doesn't enter a valid value.
         :return: code of the piece of functionality or None

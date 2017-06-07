@@ -25,6 +25,8 @@ class TestCaloriesCalculator(TestCase):
         self.calories_invalid(*tc)
         tc = ['male', -11, 190, 38, 'None']
         self.calories_invalid(*tc)
+        tc = ['female', 11, -190, 38, 'None']
+        self.calories_invalid(*tc)
 
     def calories_invalid(self, *tc):
         with self.assertRaises(ValueError):

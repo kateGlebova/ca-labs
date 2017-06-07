@@ -2,7 +2,15 @@ from calculation.calculator import Calculator
 
 
 class BaseComponentController:
+    """
+    An abstract controller that particular calculation controllers derive from.
+    """
     def __init__(self, srlzr, view):
+        """
+        Initialise _serializer, _view objects and dictionary with corresponding input functions.
+        :param srlzr: Serializer subclass
+        :param view: View
+        """
         self._view = view
         self._serializer = srlzr
 
@@ -14,19 +22,32 @@ class BaseComponentController:
             'exercise_level': self._input_exercise_level
         }
 
-    def control(self):
-        raise NotImplementedError()
-
     @property
     def _required_input(self):
         return self._required_input
 
+    def control(self):
+        """
+        An abstract method that should be implemented in all derived classes.
+        """
+        raise NotImplementedError()
+
     def _get_required_input_from_user(self):
+        """
+        Ask user for the required for the particular computation input.
+        :return: dict | input
+        """
         input_dict = {inp: self._input_functions[inp]() for inp in self._required_input}
         return input_dict
 
     @staticmethod
     def _controller_input(view_input, *k):
+        """
+        Ask user for input, repeat if nothing was entered.
+        :param view_input: func | view input function
+        :param k: arbitary positional arguments for the view function
+        :return: str | input data
+        """
         data = view_input(*k)
         while data is None:
             data = view_input(*k)

@@ -7,14 +7,7 @@ from serialization.serialization import Serializer
 
 class YAMLSerializer(Serializer):
     """
-        A yaml calculator serializer.
-
-        Methods derived from Serializer class:
-
-            add_bmr -- add BMR entry to the object.
-            add_bmi -- add BMI entry to the object.
-            add_calories -- add daily rate entry to the object.
-            _dump -- _dump the object to the file.
+        A yaml calculator serializer.e object.
     """
     _filename = 'data.yaml'
 

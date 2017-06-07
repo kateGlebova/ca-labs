@@ -6,3 +6,8 @@ __pycache__/
 serialization/*.json
 serialization/*.yaml
 serialization/*.p
+.DS_Store
+.coverage
+calculator.mdj
+serialization/.DS_Store
+serialization/.coverage

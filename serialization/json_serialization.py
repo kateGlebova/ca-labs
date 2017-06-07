@@ -8,13 +8,6 @@ from serialization.serialization import Serializer
 class JSONSerializer(Serializer):
     """
         A json calculator serializer.
-
-        Methods derived from Serializer class:
-
-            add_bmr -- add BMR entry to the object.
-            add_bmi -- add BMI entry to the object.
-            add_calories -- add daily rate entry to the object.
-            dump -- dump the object to the file.
     """
     _filename = 'data.json'
 

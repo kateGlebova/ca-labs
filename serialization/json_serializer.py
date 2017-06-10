@@ -1,11 +1,10 @@
 import json
-
 from os.path import dirname, join
 
-from serialization.serialization import Serializer
+from serialization.serializer_types import TextSerializer
 
 
-class JSONSerializer(Serializer):
+class JSONSerializer(TextSerializer):
     """
         A json calculator serializer.
     """

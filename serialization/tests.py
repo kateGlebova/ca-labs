@@ -5,9 +5,9 @@ Unit test for Serializer subclasses.
 from io import StringIO, BytesIO
 import unittest
 
-from serialization.json_serialization import JSONSerializer
-from serialization.pickle_serialization import PICKLESerializer
-from serialization.yaml_serialization import YAMLSerializer
+from serialization.json_serializer import JSONSerializer
+from serialization.pickle_serializer import PICKLESerializer
+from serialization.yaml_serializer import YAMLSerializer
 
 
 class TestSerializeMethods(unittest.TestCase):

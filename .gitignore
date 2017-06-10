@@ -11,3 +11,5 @@ serialization/*.p
 calculator.mdj
 serialization/.DS_Store
 serialization/.coverage
+*.mdj
+*.txt

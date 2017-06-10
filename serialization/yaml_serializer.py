@@ -2,10 +2,10 @@ import yaml
 
 from os.path import dirname, join
 
-from serialization.serialization import Serializer
+from serialization.serializer_types import TextSerializer
 
 
-class YAMLSerializer(Serializer):
+class YAMLSerializer(TextSerializer):
     """
         A yaml calculator serializer.e object.
     """
